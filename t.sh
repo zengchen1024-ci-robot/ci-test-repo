@@ -1,3 +1,7 @@
+if [$# -eq 1]; then
+  echo "input branch number"
+  exit 0
+fi
 
 branch="test$1"
 file="test$1.tf"
