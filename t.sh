@@ -1,4 +1,4 @@
-if [$# -ne 1]; then
+if [ $# -ne 1 ]; then
   echo "input branch number"
   exit 0
 fi
