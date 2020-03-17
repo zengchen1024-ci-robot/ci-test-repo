@@ -1,0 +1,190 @@
+Name:         8b1b55bc-6843-11ea-9c88-0255ac10001f
+Namespace:    test-pods
+Priority:     0
+Node:         192.168.1.75/192.168.1.75
+Start Time:   Tue, 17 Mar 2020 19:36:56 +0800
+Labels:       created-by-prow=true
+              event-GUID=8aafc9dc-6843-11ea-982c-63db1d55967d
+              prow.k8s.io/build-id=
+              prow.k8s.io/id=8b1b55bc-6843-11ea-9c88-0255ac10001f
+              prow.k8s.io/job=test-postsubmit
+              prow.k8s.io/refs.org=zengchen1024-ci-robot
+              prow.k8s.io/refs.repo=ci-test-repo
+              prow.k8s.io/type=postsubmit
+Annotations:  prow.k8s.io/job: test-postsubmit
+Status:       Succeeded
+IP:           172.16.0.25
+IPs:          <none>
+Init Containers:
+  clonerefs:
+    Container ID:  docker://a06051fc50bd18d438217e28fe86579c2f1337a4a0eb6ca50b9a5f4d1538a93e
+    Image:         gcr.io/k8s-prow/clonerefs:v20200302-c921a880e
+    Image ID:      docker-pullable://gcr.io/k8s-prow/clonerefs@sha256:5b27363a1c1db197422c0ca53dec884d04f73d6edb71958b52ebda31a5db50fe
+    Port:          <none>
+    Host Port:     <none>
+    Command:
+      /clonerefs
+    State:          Terminated
+      Reason:       Completed
+      Exit Code:    0
+      Started:      Tue, 17 Mar 2020 19:36:58 +0800
+      Finished:     Tue, 17 Mar 2020 19:37:01 +0800
+    Ready:          True
+    Restart Count:  0
+    Environment:
+      CLONEREFS_OPTIONS:  {"src_root":"/home/prow/go","log":"/logs/clone.json","git_user_name":"ci-robot","git_user_email":"ci-robot@k8s.io","refs":[{"org":"zengchen1024-ci-robot","repo":"ci-test-repo","base_ref":"test19","base_sha":"20a8e9dc8027a6051919b749d089933e3125ad64","base_link":"https://github.com/zengchen1024-ci-robot/ci-test-repo/commit/20a8e9dc8027"}]}
+    Mounts:
+      /home/prow/go from code (rw)
+      /logs from logs (rw)
+      /tmp from clonerefs-tmp (rw)
+  initupload:
+    Container ID:  docker://5a6aad064477aeb424a3bb26faa679c23dbe7684e280ec3865f89c40d8723f31
+    Image:         zengchen1024/initupload:v20200228-31c76444b
+    Image ID:      docker-pullable://zengchen1024/initupload@sha256:168bdd79f5d05f796d48b29c35e20d69322894fc861c583e1f06d5b6bf24e3a9
+    Port:          <none>
+    Host Port:     <none>
+    Command:
+      /initupload
+    State:          Terminated
+      Reason:       Completed
+      Exit Code:    0
+      Started:      Tue, 17 Mar 2020 19:37:03 +0800
+      Finished:     Tue, 17 Mar 2020 19:37:03 +0800
+    Ready:          True
+    Restart Count:  0
+    Environment:
+      INITUPLOAD_OPTIONS:  {"bucket":"prow-artifacts","path_strategy":"explicit","gcs_credentials_file":"/secrets/gcs/service-account.json","dry_run":false,"log":"/logs/clone.json"}
+      JOB_SPEC:            {"type":"postsubmit","job":"test-postsubmit","buildid":"1239878381915344896","prowjobid":"8b1b55bc-6843-11ea-9c88-0255ac10001f","refs":{"org":"zengchen1024-ci-robot","repo":"ci-test-repo","base_ref":"test19","base_sha":"20a8e9dc8027a6051919b749d089933e3125ad64","base_link":"https://github.com/zengchen1024-ci-robot/ci-test-repo/commit/20a8e9dc8027"}}
+    Mounts:
+      /logs from logs (rw)
+      /secrets/gcs from gcs-credentials (rw)
+  place-entrypoint:
+    Container ID:  docker://dc97a6a71c3df45fb46e4ca175639333d000ba8aee6168121ff55de10f0df5e8
+    Image:         gcr.io/k8s-prow/entrypoint:v20200302-c921a880e
+    Image ID:      docker-pullable://gcr.io/k8s-prow/entrypoint@sha256:34f8686f756cca2dd961f3a50aa1970f4985b7459297029332310b5f154549e8
+    Port:          <none>
+    Host Port:     <none>
+    Command:
+      /bin/cp
+    Args:
+      /entrypoint
+      /tools/entrypoint
+    State:          Terminated
+      Reason:       Completed
+      Exit Code:    0
+      Started:      Tue, 17 Mar 2020 19:37:04 +0800
+      Finished:     Tue, 17 Mar 2020 19:37:04 +0800
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /tools from tools (rw)
+Containers:
+  test:
+    Container ID:  docker://4cb69bd67c5ad7ea85c5ab85c54551dc2f5317c097c2a612fe7bda39f24abd6b
+    Image:         alpine
+    Image ID:      docker-pullable://alpine@sha256:57334c50959f26ce1ee025d08f136c2292c128f84e7b229d1b0da5dac89e9866
+    Port:          <none>
+    Host Port:     <none>
+    Command:
+      /tools/entrypoint
+    State:          Terminated
+      Reason:       Completed
+      Exit Code:    0
+      Started:      Tue, 17 Mar 2020 19:37:05 +0800
+      Finished:     Tue, 17 Mar 2020 19:37:05 +0800
+    Ready:          False
+    Restart Count:  0
+    Environment:
+      ARTIFACTS:           /logs/artifacts
+      BUILD_ID:            1239878381915344896
+      BUILD_NUMBER:        1239878381915344896
+      CI:                  true
+      GOPATH:              /home/prow/go
+      JOB_NAME:            test-postsubmit
+      JOB_SPEC:            {"type":"postsubmit","job":"test-postsubmit","buildid":"1239878381915344896","prowjobid":"8b1b55bc-6843-11ea-9c88-0255ac10001f","refs":{"org":"zengchen1024-ci-robot","repo":"ci-test-repo","base_ref":"test19","base_sha":"20a8e9dc8027a6051919b749d089933e3125ad64","base_link":"https://github.com/zengchen1024-ci-robot/ci-test-repo/commit/20a8e9dc8027"}}
+      JOB_TYPE:            postsubmit
+      PROW_JOB_ID:         8b1b55bc-6843-11ea-9c88-0255ac10001f
+      PULL_BASE_REF:       test19
+      PULL_BASE_SHA:       20a8e9dc8027a6051919b749d089933e3125ad64
+      PULL_REFS:           test19:20a8e9dc8027a6051919b749d089933e3125ad64
+      REPO_NAME:           ci-test-repo
+      REPO_OWNER:          zengchen1024-ci-robot
+      ENTRYPOINT_OPTIONS:  {"timeout":0,"grace_period":0,"artifact_dir":"/logs/artifacts","args":["/bin/printenv"],"process_log":"/logs/process-log.txt","marker_file":"/logs/marker-file.txt","metadata_file":"/logs/artifacts/metadata.json"}
+    Mounts:
+      /home/prow/go from code (rw)
+      /logs from logs (rw)
+      /tools from tools (rw)
+  sidecar:
+    Container ID:  docker://6b6e8766c9808d15866fa7444a12d733adbbf9b0116a3e5c14e910fa8801a312
+    Image:         zengchen1024/sidecar:v20200228-31c76444b
+    Image ID:      docker-pullable://zengchen1024/sidecar@sha256:2c52ee6e6fd8bc8f54b518ae996a9f5e61ac6804983b1470c7c28563b721960c
+    Port:          <none>
+    Host Port:     <none>
+    Command:
+      /sidecar
+    State:          Terminated
+      Reason:       Completed
+      Exit Code:    0
+      Started:      Tue, 17 Mar 2020 19:37:06 +0800
+      Finished:     Tue, 17 Mar 2020 19:37:06 +0800
+    Ready:          False
+    Restart Count:  0
+    Environment:
+      JOB_SPEC:         {"type":"postsubmit","job":"test-postsubmit","buildid":"1239878381915344896","prowjobid":"8b1b55bc-6843-11ea-9c88-0255ac10001f","refs":{"org":"zengchen1024-ci-robot","repo":"ci-test-repo","base_ref":"test19","base_sha":"20a8e9dc8027a6051919b749d089933e3125ad64","base_link":"https://github.com/zengchen1024-ci-robot/ci-test-repo/commit/20a8e9dc8027"}}
+      SIDECAR_OPTIONS:  {"gcs_options":{"items":["/logs/artifacts"],"bucket":"prow-artifacts","path_strategy":"explicit","gcs_credentials_file":"/secrets/gcs/service-account.json","dry_run":false},"entries":[{"args":["/bin/printenv"],"process_log":"/logs/process-log.txt","marker_file":"/logs/marker-file.txt","metadata_file":"/logs/artifacts/metadata.json"}]}
+    Mounts:
+      /logs from logs (rw)
+      /secrets/gcs from gcs-credentials (rw)
+Conditions:
+  Type              Status
+  Initialized       True 
+  Ready             False 
+  ContainersReady   False 
+  PodScheduled      True 
+Volumes:
+  logs:
+    Type:       EmptyDir (a temporary directory that shares a pod's lifetime)
+    Medium:     
+    SizeLimit:  <unset>
+  tools:
+    Type:       EmptyDir (a temporary directory that shares a pod's lifetime)
+    Medium:     
+    SizeLimit:  <unset>
+  gcs-credentials:
+    Type:        Secret (a volume populated by a Secret)
+    SecretName:  gcs-credentials
+    Optional:    false
+  clonerefs-tmp:
+    Type:       EmptyDir (a temporary directory that shares a pod's lifetime)
+    Medium:     
+    SizeLimit:  <unset>
+  code:
+    Type:        EmptyDir (a temporary directory that shares a pod's lifetime)
+    Medium:      
+    SizeLimit:   <unset>
+QoS Class:       BestEffort
+Node-Selectors:  <none>
+Tolerations:     node.kubernetes.io/not-ready:NoExecute for 300s
+                 node.kubernetes.io/unreachable:NoExecute for 300s
+Events:
+  Type    Reason                 Age    From                   Message
+  ----    ------                 ----   ----                   -------
+  Normal  Scheduled              6m20s  default-scheduler      Successfully assigned test-pods/8b1b55bc-6843-11ea-9c88-0255ac10001f to 192.168.1.75
+  Normal  SuccessfulMountVolume  6m19s  kubelet, 192.168.1.75  Successfully mounted volumes for pod "8b1b55bc-6843-11ea-9c88-0255ac10001f_test-pods(9b6442c7-6843-11ea-a70d-fa163ea602ef)"
+  Normal  Pulled                 6m18s  kubelet, 192.168.1.75  Container image "gcr.io/k8s-prow/clonerefs:v20200302-c921a880e" already present on machine
+  Normal  Started                6m18s  kubelet, 192.168.1.75  Started container
+  Normal  SuccessfulCreate       6m18s  kubelet, 192.168.1.75  Created container
+  Normal  Pulled                 6m14s  kubelet, 192.168.1.75  Container image "zengchen1024/initupload:v20200228-31c76444b" already present on machine
+  Normal  SuccessfulCreate       6m13s  kubelet, 192.168.1.75  Created container
+  Normal  Started                6m13s  kubelet, 192.168.1.75  Started container
+  Normal  Started                6m12s  kubelet, 192.168.1.75  Started container
+  Normal  Pulled                 6m12s  kubelet, 192.168.1.75  Container image "gcr.io/k8s-prow/entrypoint:v20200302-c921a880e" already present on machine
+  Normal  SuccessfulCreate       6m12s  kubelet, 192.168.1.75  Created container
+  Normal  Pulling                6m11s  kubelet, 192.168.1.75  pulling image "alpine"
+  Normal  Pulled                 6m11s  kubelet, 192.168.1.75  Successfully pulled image "alpine"
+  Normal  SuccessfulCreate       6m11s  kubelet, 192.168.1.75  Created container
+  Normal  Started                6m11s  kubelet, 192.168.1.75  Started container
+  Normal  Pulled                 6m11s  kubelet, 192.168.1.75  Container image "zengchen1024/sidecar:v20200228-31c76444b" already present on machine
+  Normal  SuccessfulCreate       6m10s  kubelet, 192.168.1.75  Created container
+  Normal  Started                6m10s  kubelet, 192.168.1.75  Started container
