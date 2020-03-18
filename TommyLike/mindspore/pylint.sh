@@ -58,7 +58,7 @@ output=${workspace}/pylint.log
 target_files | xargs pylint --rcfile=${pylintrc_path} -j 2 --output-format=parseable > $output
 DP_ASSERT_FILE "$output" "check $output"
 
-error_number=$(grep "^mindspore/ ${output} | wc -l)
+error_number=$(grep "^mindspore/" ${output} | wc -l)
 if [ $error_number -ne 0 ]; then
   LOG_ERROR "Run pylint failed, error number = $error_number"
   exit 1
