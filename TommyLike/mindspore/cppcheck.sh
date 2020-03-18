@@ -45,7 +45,7 @@ done
 # Run cppcheck
 LOG_HEAD "Run cppcheck."
 output=${workspace}/cppcheck-style.xml
-cppcheck --enable=style --xml --inline-suppr --force --xml-version=2 ${project_path} 2> $output
+cppcheck --enable=style --xml --inline-suppr --force --xml-version=2 ${project_path} > $output 2>&1
 DP_ASSERT_FILE $output "check $output"
 
 error_number=$(grep "<error id=" ${output} | wc -l)

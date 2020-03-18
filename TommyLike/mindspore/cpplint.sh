@@ -48,7 +48,7 @@ output=${workspace}/cpplint-style.xml
 cpplint --root=src --extensions=cxx,cu,hh,cpp,hxx,cuh,h++,cc,c,hpp,c++,h --quiet --repository=${project_path} --linelength=120 --recursive ${project_path} > ${output} 2>&1
 DP_ASSERT_FILE $output "check $output"
 
-error_number=$(grep "<error id=" ${output} | wc -l)
+error_number=$(grep "$project_path" ${output} | wc -l)
 if [ $error_number -ne 0 ]; then
   LOG_ERROR "Run cpplint failed, error number = $error_number"
   exit 1
