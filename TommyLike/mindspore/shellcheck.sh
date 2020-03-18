@@ -42,14 +42,18 @@ for folder in ${exclude_folder//,/ }; do
     rm -rf ${project_path}/${folder}
 done
 
-# Run cppcheck
-LOG_HEAD "Run cpplint."
-output=${workspace}/cpplint-style.xml
-cpplint --root=src --extensions=cxx,cu,hh,cpp,hxx,cuh,h++,cc,c,hpp,c++,h --quiet --repository=${project_path} --linelength=120 --recursive ${project_path} > ${output} 2>&1
+# Run shellcheck (warning)
+
+target_files() {
+  find ${project_path} -iname "*.sh" -type f
+}
+
+LOG_HEAD "Run shellcheck(warning && error)."
+warning_number=$(target_files | xargs shellcheck --severity=warning --format=gcc | wc -l)
+LOG_INFO "Shellcheck warning number: ${warning_number}"
+
+output=${workspace}/shellcheck_result.log
+target_files | xargs shellcheck --severity=warning --format=tty > $output
 DP_ASSERT_FILE $output "check $output"
 
-error_number=$(grep "<error id=" ${output} | wc -l)
-if [ $error_number -ne 0 ]; then
-  LOG_ERROR "Run cpplint failed, error number = $error_number"
-  exit 1
-fi
+cat ${output}

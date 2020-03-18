@@ -43,13 +43,13 @@ for folder in ${exclude_folder//,/ }; do
 done
 
 # Run cppcheck
-LOG_HEAD "Run cpplint."
-output=${workspace}/cpplint-style.xml
-cpplint --root=src --extensions=cxx,cu,hh,cpp,hxx,cuh,h++,cc,c,hpp,c++,h --quiet --repository=${project_path} --linelength=120 --recursive ${project_path} > ${output} 2>&1
+LOG_HEAD "Run cppcheck."
+output=${workspace}/cppcheck-style.xml
+cppcheck --enable=style --xml --inline-suppr --force --xml-version=2 ${project_path} 2> $output
 DP_ASSERT_FILE $output "check $output"
 
 error_number=$(grep "<error id=" ${output} | wc -l)
 if [ $error_number -ne 0 ]; then
-  LOG_ERROR "Run cpplint failed, error number = $error_number"
+  LOG_ERROR "Run cppcheck failed, error number = $error_number"
   exit 1
 fi
