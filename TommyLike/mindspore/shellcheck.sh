@@ -39,7 +39,7 @@ exclude_folder="tests,third_party,graphengine"
 LOG_HEAD "Exclude folder(${exclude_folder})."
 
 for folder in ${exclude_folder//,/ }; do
-    rm -rf ${project_path}/${folder}
+    delete_path "${project_path}/${folder}"
 done
 
 # Run shellcheck (warning)
